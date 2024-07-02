@@ -6,7 +6,7 @@ class Login extends Controller
 	public function index()
 	{
 		if (isset($_SESSION['user'])) {
-			return $this->redirect('home', 'index');
+			return $this->view('home/index');
 		}
 		return $this->view('login/index');
 	}
