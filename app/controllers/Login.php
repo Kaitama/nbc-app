@@ -5,9 +5,9 @@ class Login extends Controller
 	// menampilkan halaman login
 	public function index()
 	{
-		// if (isset($_SESSION['user'])) {
-		// 	return $this->view('home/index');
-		// }
+		if (isset($_SESSION['user'])) {
+			return $this->view('home/index');
+		}
 		return $this->view('login/index');
 	}
 
