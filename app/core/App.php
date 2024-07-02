@@ -12,9 +12,12 @@ class App
 		// sanitasi url
 		$url = $this->parsing();
 		// cek apakah controller ada?
-		if (isset($url[0]) && file_exists("../app/controllers/{ucfirst($url[0])}.php")) {
-			$this->controller = ucfirst($url[0]);
-			unset($url[0]);
+		if (isset($url[0])) {
+      $file = ucfirst($url[0]);
+      if(file_exists("../app/controllers/{$file}.php")){
+        $this->controller = $file;
+        unset($url[0]);
+      }
 		}
 		require_once "../app/controllers/{$this->controller}.php";
 		$this->controller = new $this->controller;
