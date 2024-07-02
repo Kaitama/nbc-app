@@ -1,9 +1,9 @@
 <div style="margin-top: 4rem; display:flex; justify-content:center">
 	<div class="ui raised card" style="min-width: 420px;">
 		<div class="content">
-			<div class="header">Login user</div>
+			<div class="header">Login</div>
 			<div class="meta">
-				<div class="category">Masuk dan mulai berbelanja</div>
+				<div class="category">Masuk dengan akun administrator.</div>
 			</div>
 			<div class="description">
 

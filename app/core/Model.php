@@ -42,15 +42,43 @@ class Model
 		return $this->db->count();
 	}
 
-	// metode ambil data berasarkan kolom tertentu
-	public function where($column, $value)
+	public function deleteAll()
 	{
 		$this->db->query(
-			'SELECT * FROM ' . $this->table . ' WHERE :column=:value'
+			'DELETE FROM ' . $this->table
 		);
-		$this->db->bind('column', $column);
-		$this->db->bind('value', $value);
 		$this->db->execute();
+		return $this->db->count();
+	}
+
+	// metode ambil data berasarkan kolom tertentu
+	public function where($column, $value, $multiple = false)
+	{
+		$this->db->query(
+			'SELECT * FROM ' . $this->table . ' WHERE ' . $column . '=:value'
+		);
+		$this->db->bind('value', $value);
+		if ($multiple) {
+			return $this->db->multiple();
+		}
+		return $this->db->single();
+	}
+
+	public function whereAnd($pairs = [], $multiple = false)
+	{
+		$string = [];
+		foreach ($pairs as $col => $val) {
+			$string[] = $col . '=:' . $col;
+		}
+		$query = "SELECT * FROM $this->table WHERE " . implode(' AND ', $string);
+		$this->db->query($query);
+
+		foreach ($pairs as $k => $v) {
+			$this->db->bind($k, $v);
+		}
+		if ($multiple) {
+			return $this->db->multiple();
+		}
 		return $this->db->single();
 	}
 
@@ -72,7 +100,8 @@ class Model
 		}
 		// eksekusi query
 		$this->db->execute();
-		// kembalikan jumlah data yang tersimpan ke controller 
-		return $this->db->count();
+
+		$last_id = $this->db->lastId();
+		return $this->find($last_id);
 	}
 }

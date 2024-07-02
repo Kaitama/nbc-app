@@ -5,7 +5,10 @@ class Login extends Controller
 	// menampilkan halaman login
 	public function index()
 	{
-		$this->view('login/index');
+		if (isset($_SESSION['user'])) {
+			return $this->redirect('home', 'index');
+		}
+		return $this->view('login/index');
 	}
 
 	// proses login
@@ -43,7 +46,6 @@ class Login extends Controller
 		unset($_SESSION['user']);
 		// hapus semua session yang tersisa
 		session_destroy();
-
-		return $this->redirect('home', 'index');
+		return $this->redirect('login', 'index');
 	}
 }

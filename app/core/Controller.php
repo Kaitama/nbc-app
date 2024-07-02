@@ -44,4 +44,49 @@ class Controller
 			'body' => $body
 		];
 	}
+
+	protected function convertUsia($us)
+	{
+		if ($us <= 40) {
+			return 'A';
+		} elseif ($us <= 50) {
+			return 'B';
+		} elseif ($us <= 60) {
+			return 'C';
+		} elseif ($us <= 70) {
+			return 'D';
+		} else {
+			return 'E';
+		}
+	}
+
+	protected function convertGulaDarah($gd)
+	{
+		if ($gd <= 120) {
+			return 'A';
+		} elseif ($gd <= 170) {
+			return 'B';
+		} elseif ($gd <= 220) {
+			return 'C';
+		} elseif ($gd <= 270) {
+			return 'D';
+		} else {
+			return 'E';
+		}
+	}
+
+	protected function convertBerat($bb)
+	{
+		if ($bb <= 40) {
+			return 'A';
+		} elseif ($bb <= 50) {
+			return 'B';
+		} elseif ($bb <= 60) {
+			return 'C';
+		} elseif ($bb <= 70) {
+			return 'D';
+		} else {
+			return 'E';
+		}
+	}
 }
